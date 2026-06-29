@@ -55,12 +55,20 @@ def fetch_word():
     except:
         return {"word": "resilience", "definition": "The capacity to recover quickly from difficulties."}
 
-print("Loading dashboard data...")
-weather = fetch_weather()
-quote = fetch_quote()
-word = fetch_word()
+weather = {"temp": "--", "desc": "Loading...", "feels": "--"}
+quote = {"quote": "The best time to start was yesterday. The next best time is now.", "author": "Unknown"}
+word = {"word": "resilience", "definition": "The capacity to recover quickly from difficulties."}
 tasks = load_json(TASKS_FILE, [])
 notes = load_json(NOTES_FILE, {"focus": "", "scratchpad": ""})
+
+import threading
+def load_data():
+    global weather, quote, word
+    weather = fetch_weather()
+    quote = fetch_quote()
+    word = fetch_word()
+    print("Dashboard data loaded.")
+threading.Thread(target=load_data, daemon=True).start()
 
 def build_html():
     tasks_json = json.dumps(tasks)
