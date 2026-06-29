@@ -225,6 +225,11 @@ class Handler(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         pass
 
-print("Opening dashboard... (press Ctrl+C to quit)")
-webbrowser.open("http://localhost:8766")
-HTTPServer(("localhost", 8766), Handler).serve_forever()
+PORT = int(os.environ.get("PORT", 8766))
+IS_LOCAL = PORT == 8766
+
+if IS_LOCAL:
+    print("Opening dashboard... (press Ctrl+C to quit)")
+    webbrowser.open(f"http://localhost:{PORT}")
+
+HTTPServer(("0.0.0.0", PORT), Handler).serve_forever()
