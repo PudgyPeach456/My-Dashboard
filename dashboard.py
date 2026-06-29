@@ -236,8 +236,10 @@ class Handler(BaseHTTPRequestHandler):
 PORT = int(os.environ.get("PORT", 8766))
 IS_LOCAL = PORT == 8766
 
+server = HTTPServer(("0.0.0.0", PORT), Handler)
+print(f"Server started on port {PORT}")
+
 if IS_LOCAL:
-    print("Opening dashboard... (press Ctrl+C to quit)")
     webbrowser.open(f"http://localhost:{PORT}")
 
-HTTPServer(("0.0.0.0", PORT), Handler).serve_forever()
+server.serve_forever()
