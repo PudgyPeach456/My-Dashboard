@@ -2,4 +2,4 @@
 cmds = []
 
 [start]
-cmd = "python 'Personal Dashboard [Web App & Live Data].py'"
+cmd = "python personal_dashboard.py"

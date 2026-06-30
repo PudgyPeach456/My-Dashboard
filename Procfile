@@ -1,1 +1,1 @@
-web: python "Personal Dashboard [Web App & Live Data].py"
+web: python personal_dashboard.py
